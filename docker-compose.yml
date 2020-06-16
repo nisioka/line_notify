@@ -1,0 +1,6 @@
+line_notify:
+  build: .
+  command: echo 'ready'
+  volumes:
+    - .:/home/app/notify
+    - /home/app/notify/node_modules
