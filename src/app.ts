@@ -2,15 +2,14 @@ const valid_column: number = 0;
 const message_column: number = 1;
 const time_column: number = 2;
 const the_day_column: number = 3;
-const everyday_column: number = 4;
-const monday_column: number = 5;
-const tuesday_column: number = 6;
-const wednesday_column: number = 7;
-const thursday_column: number = 8;
-const friday_column: number = 9;
-const saturday_column: number = 10;
-const sunday_column: number = 11;
-const n_th_day_column: number = 12;
+const monday_column: number = 4;
+const tuesday_column: number = 5;
+const wednesday_column: number = 6;
+const thursday_column: number = 7;
+const friday_column: number = 8;
+const saturday_column: number = 9;
+const sunday_column: number = 10;
+const n_th_day_column: number = 11;
 
 /**
  * スプレッドシートに定義されたものが通知対象かをチェックする。
@@ -19,7 +18,8 @@ const n_th_day_column: number = 12;
 function main(): void {
     const line_token: string = SpreadsheetApp.getActive().getSheetByName("設定").getRange(2, 2).getValue();
     const max_row_number: number = 20;
-    const targets = SpreadsheetApp.getActive().getSheetByName("main").getRange(3, 1, max_row_number, 5).getValues();
+    const targets = SpreadsheetApp.getActive().getSheetByName("main")
+        .getRange(3, 1, max_row_number, n_th_day_column + 1).getValues();
     const today: Date = new Date();
 
     for (let row: number = 0; row < max_row_number; row++) {
@@ -55,10 +55,11 @@ function check(target_row, today: Date): boolean {
         }
     } else if (target_row[n_th_day_column]) {
         const n_th_list: string = target_row[n_th_day_column];
-        if (n_th_list.indexOf(get_n_th_of_month(today)) == -1){
+        if (n_th_list.indexOf(get_n_th_of_month(today)) == -1) {
             return false
         }
-    } if (target_row[monday_column] // 曜日
+    }
+    if (target_row[monday_column] // 曜日
         || target_row[tuesday_column]
         || target_row[wednesday_column]
         || target_row[thursday_column]
@@ -101,7 +102,7 @@ function check_time(the_day: Date, today: Date): boolean {
  * その月の第何曜日かを取得する。
  * @param date 対象日
  */
-function get_n_th_of_month(date): string{
+function get_n_th_of_month(date): string {
     return (Math.floor((date.getDate() - 1) / 7) + 1).toString()
 }
 
