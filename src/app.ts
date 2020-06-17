@@ -2,13 +2,13 @@ const valid_column: number = 0;
 const message_column: number = 1;
 const time_column: number = 2;
 const the_day_column: number = 3;
-const monday_column: number = 4;
-const tuesday_column: number = 5;
-const wednesday_column: number = 6;
-const thursday_column: number = 7;
-const friday_column: number = 8;
-const saturday_column: number = 9;
-const sunday_column: number = 10;
+const sunday_column: number = 4;
+const monday_column: number = 5;
+const tuesday_column: number = 6;
+const wednesday_column: number = 7;
+const thursday_column: number = 8;
+const friday_column: number = 9;
+const saturday_column: number = 10;
 const n_th_day_column: number = 11;
 
 /**
@@ -59,13 +59,13 @@ function check(target_row, today: Date): boolean {
             return false
         }
     }
-    if (target_row[monday_column] // 曜日
+    if (target_row[sunday_column] // 曜日
+        || target_row[monday_column]
         || target_row[tuesday_column]
         || target_row[wednesday_column]
         || target_row[thursday_column]
         || target_row[friday_column]
-        || target_row[saturday_column]
-        || target_row[sunday_column]) {
+        || target_row[saturday_column]) {
         if (today.getDay() == 0 && target_row[sunday_column]) {
             return check_time(target_time, today)
         } else if (today.getDay() == 1 && target_row[monday_column]) {
