@@ -53,7 +53,9 @@ function check(target_row, today: Date): boolean {
 
             return check_time(target_time, today)
         }
-    } else if (target_row[n_th_day_column]) {
+        return false
+    }
+    if (target_row[n_th_day_column]) {
         const n_th_list: string = target_row[n_th_day_column];
         if (n_th_list.indexOf(get_n_th_of_month(today)) == -1) {
             return false
